@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import MainNavbar from "./MainNavbar";
-import MainPageFilter from "./MainPageFilter";
+import MainNavbar from "./components/MainNavbar";
+import MainPageFilter from "./components/MainPageFilter";
 import Test from "./Test";
 
 function GetData() {
