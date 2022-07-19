@@ -13,7 +13,7 @@ function Test({ albumData }) {
   return (
     <div>
       <Container>
-        <Card style={{ borderWidth: "2px", padding }}>
+        <Card style={{ borderWidth: "2px" }}>
           <Card.Body>
             <Row>
               <Col>

@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import MainNavbar from "./MainNavbar";
+import MainPageFilter from "./MainPageFilter";
 import Test from "./Test";
 
 function GetData() {
@@ -20,6 +22,8 @@ function GetData() {
 
   return (
     <div>
+      <MainNavbar />
+      <MainPageFilter />
       <Test albumData={albumData} />
     </div>
   );
