@@ -9,7 +9,7 @@ function Test({ albumData }) {
   console.log("albumData", albumData);
 
   return (
-    <div>
+    <>
       <Container>
         <Card style={{ borderWidth: "2px" }}>
           <Card.Body>
@@ -26,35 +26,11 @@ function Test({ albumData }) {
                   </Card>
                 )}
               </Col>
-              <Col>
-                {!albumData ? (
-                  <LoadingPleaseWait />
-                ) : (
-                  <Card style={{ borderWidth: "0px", width: "18rem" }}>
-                    <Card.Img variant="top" src="./No_image_available.png" />
-                    <Card.Body>
-                      <Card.Title>Card Title</Card.Title>
-                    </Card.Body>
-                  </Card>
-                )}
-              </Col>
-              <Col>
-                {!albumData ? (
-                  <LoadingPleaseWait />
-                ) : (
-                  <Card style={{ borderWidth: "0px", width: "18rem" }}>
-                    <Card.Img variant="top" src="./No_image_available.png" />
-                    <Card.Body>
-                      <Card.Title>Card Title</Card.Title>
-                    </Card.Body>
-                  </Card>
-                )}
-              </Col>
             </Row>
           </Card.Body>
         </Card>
       </Container>
-    </div>
+    </>
   );
 }
 
