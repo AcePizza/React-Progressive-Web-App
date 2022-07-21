@@ -4,7 +4,8 @@ import Col from "react-bootstrap/Col";
 import { Link } from "react-router-dom";
 
 function DisplayCard({ artist, index }) {
-  const artistName = artist.title;
+  const artistName = artist;
+
   return (
     <Col key={index}>
       <Card
