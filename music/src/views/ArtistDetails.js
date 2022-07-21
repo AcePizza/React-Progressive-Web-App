@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 
 function ArtistDetails() {
   let { artistName } = useParams();
+  console.log("useParams()", useParams());
 
   return (
     <div>
