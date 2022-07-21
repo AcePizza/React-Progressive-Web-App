@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import MainNavbar from "./components/MainNavbar";
 import MainPageFilter from "./components/MainPageFilter";
-import Test from "./Test";
 import DisplayCard from "./components/DisplayCard";
 import LoadingPleaseWait from "./components/LoadingPleaseWait";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import { Link } from "react-router-dom";
 
 const API_KEY = process.env.REACT_APP_API_KEY;
 const API_URL = `https://api.discogs.com/database/search?${API_KEY}`;
@@ -26,12 +28,22 @@ function GetData() {
   useEffect(() => {
     fetchAlbumData();
   }, []);
+  console.log("albumData", albumData);
 
   return (
     <div>
-      <MainNavbar />
       <MainPageFilter />
-      {!albumData ? <LoadingPleaseWait /> : <p>Didnt happen</p>}
+      <Container>
+        <Row>
+          {!albumData ? (
+            <LoadingPleaseWait />
+          ) : (
+            albumData.results.map((artist, index) => {
+              return <DisplayCard artist={artist} index={index} />;
+            })
+          )}
+        </Row>
+      </Container>
     </div>
   );
 }
