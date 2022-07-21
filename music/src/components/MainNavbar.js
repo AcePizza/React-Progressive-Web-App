@@ -10,12 +10,13 @@ function MainNavbar() {
   return (
     <Navbar bg="light" expand="lg">
       <Container>
-        <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
+        <Navbar.Brand href="#home">Discogs API Project</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Link to="/">Home</Link>
-            <Nav.Link href="#link">Link</Nav.Link>
+            <Link to="/">
+              <Nav.Link href="/">Home</Nav.Link>
+            </Link>
           </Nav>
           <Form className="d-flex">
             <Form.Control

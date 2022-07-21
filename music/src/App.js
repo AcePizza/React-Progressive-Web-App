@@ -11,7 +11,7 @@ function App() {
       <MainNavbar />
       <Routes>
         <Route path="/" element={<GetData />} />
-        <Route path="details" element={<ArtistDetails />} />
+        <Route path="details/:artistName" element={<ArtistDetails />} />
         <Route path="*" element={<NothingMuch />} />
       </Routes>
     </div>
