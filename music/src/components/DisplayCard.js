@@ -17,7 +17,7 @@ function DisplayCard({ artist, index }) {
         <Card.Img variant="top" src={artist.cover_image} />
         <Card.Body>
           <Card.Title>
-            <Link to={`details/${artistName}`}>{artist.title}</Link>
+            <Link to={`details/${artistName.title}`}>{artist.title}</Link>
           </Card.Title>
         </Card.Body>
       </Card>

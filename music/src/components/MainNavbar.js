@@ -14,9 +14,7 @@ function MainNavbar() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Link to="/">
-              <Nav.Link href="/">Home</Nav.Link>
-            </Link>
+            <Nav.Link href="/">Home</Nav.Link>
           </Nav>
           <Form className="d-flex">
             <Form.Control
