@@ -46,7 +46,7 @@ function GetData() {
     pagNum();
   }, [page]);
 
-  console.log("albumData", albumData);
+  // console.log("albumData", albumData);
 
   return (
     <div>

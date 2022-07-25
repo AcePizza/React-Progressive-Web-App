@@ -33,18 +33,19 @@ function ArtistDetails() {
   console.log("useParams()", useParams());
 
   return (
-    <div>
+    <Container>
       <p>Artist details for {artistName}</p>
       <Container>
         <Row>
           <ListGroup>
             <ListGroupItem>
-              Something <img src={releases.releases[3].thumb}></img>
+              Something{" "}
+              {/* <img src={!releases ? releases.releases[0].thumb : null}></img> */}
             </ListGroupItem>
           </ListGroup>
         </Row>
       </Container>
-    </div>
+    </Container>
   );
 }
 

@@ -16,6 +16,9 @@ function MainNavbar() {
           <Nav className="me-auto">
             <Nav.Link href="/">Home</Nav.Link>
           </Nav>
+          <Nav className="me-auto">
+            <Nav.Link href="/LoginScreen">Login</Nav.Link>
+          </Nav>
           <Form className="d-flex">
             <Form.Control
               type="search"
