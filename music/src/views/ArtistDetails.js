@@ -11,10 +11,12 @@ const API_KEY = process.env.REACT_APP_API_KEY;
 function ArtistDetails() {
   const [releases, setReleases] = useState();
 
+  let { artistName } = useParams();
+
   const fetchReleases = async () => {
     try {
       const response = await fetch(
-        `https://api.discogs.com/artists/1/releases?${API_KEY}`
+        `https://api.discogs.com/artists/${artistName}/releases?${API_KEY}`
       );
       const results = await response.json();
       setReleases(results);
@@ -27,11 +29,6 @@ function ArtistDetails() {
     fetchReleases();
   }, []);
 
-  console.log("releases", releases);
-
-  let { artistName } = useParams();
-  console.log("useParams()", useParams());
-
   return (
     <Container>
       <p>Artist details for {artistName}</p>
@@ -39,8 +36,7 @@ function ArtistDetails() {
         <Row>
           <ListGroup>
             <ListGroupItem>
-              Something{" "}
-              {/* <img src={!releases ? releases.releases[0].thumb : null}></img> */}
+              Something <img src={releases && releases.releases[0].thumb}></img>
             </ListGroupItem>
           </ListGroup>
         </Row>
