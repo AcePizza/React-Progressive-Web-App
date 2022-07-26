@@ -7,12 +7,11 @@ import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import { Link } from "react-router-dom";
 
-function MainNavbar() {
+function MainNavbar({ getSearchInput }) {
   const [input, setInput] = useState("");
 
   const onChangeSearchHandeler = (e) => {
     setInput(e.target.value);
-    console.log("input >>>", input);
   };
 
   return (
@@ -39,7 +38,7 @@ function MainNavbar() {
             <Button
               variant="outline-success"
               onClick={() => {
-                onChangeSearchHandeler(input);
+                getSearchInput(input);
               }}
             >
               Search

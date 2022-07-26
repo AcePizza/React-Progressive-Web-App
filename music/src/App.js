@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import MainNavbar from "./components/MainNavbar";
@@ -7,11 +8,18 @@ import LoginScreen from "./views/LoginScreen";
 import NothingMuch from "./views/NothingMuch";
 
 function App() {
+  const [searchInput, setSearchInput] = useState();
+
+  const getSearchInput = (input) => {
+    setSearchInput(input);
+    console.log(input);
+  };
+
   return (
     <div className="App">
-      <MainNavbar />
+      <MainNavbar getSearchInput={getSearchInput} />
       <Routes>
-        <Route path="/" element={<GetData />} />
+        <Route path="/" element={<GetData searchInput={searchInput} />} />
         <Route path="details/:artistName" element={<ArtistDetails />} />
         <Route path="*" element={<NothingMuch />} />
         <Route path="LoginScreen" element={<LoginScreen />} />
