@@ -13,17 +13,11 @@ const API_KEY = process.env.REACT_APP_API_KEY;
 
 function GetData({ searchInput }) {
   const [albumData, setAlbumData] = useState();
-  const [page, setPage] = useState(1);
-  const [first, setFirst] = useState(page);
-  const [second, setSecond] = useState();
-  const [third, setThird] = useState();
-  const [forth, setForth] = useState();
-  const [fifth, setFift] = useState();
 
   const fetchAlbumData = async () => {
     try {
       const response = await fetch(
-        `https://api.discogs.com/database/search?page=${page}&per_page=20${API_KEY}`
+        `https://api.discogs.com/database/search?page=1&per_page=20${API_KEY}`
       );
       const results = await response.json();
       setAlbumData(results);
@@ -35,16 +29,9 @@ function GetData({ searchInput }) {
   useEffect(() => {
     fetchAlbumData();
     // pagNum(); This was used by the pagination which is now moved to a different component
-  }, [page]);
+  }, []);
 
   console.log(albumData);
-
-  // albumData &&
-  //   albumData.results.filter((element) => {
-  //     let name = element.title.toUpperCase();
-  //     console.log("Something", name);
-  //     console.log("Something", filter.toUpperCase());
-  //   });
 
   let results = [];
 
@@ -55,7 +42,9 @@ function GetData({ searchInput }) {
         ? results.push(element)
         : console.log("no match");
     });
+
   console.log("results", results);
+  // Search is working just need to replace albumData in the JSX below
 
   return (
     <Container>

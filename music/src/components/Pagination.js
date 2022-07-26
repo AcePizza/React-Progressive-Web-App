@@ -1,6 +1,13 @@
 import React from "react";
 
 function Pagination() {
+  const [page, setPage] = useState(1);
+  const [first, setFirst] = useState(page);
+  const [second, setSecond] = useState();
+  const [third, setThird] = useState();
+  const [forth, setForth] = useState();
+  const [fifth, setFift] = useState();
+
   const pagNum = () => {
     let generatedNumbers = Array.from(Array(5), (_, index) => index + page);
     setFirst(generatedNumbers[0]);
