@@ -1,13 +1,8 @@
 import React, { useEffect, useState } from "react";
-import MainNavbar from "./components/MainNavbar";
-import MainPageFilter from "./components/MainPageFilter";
 import DisplayCard from "./components/DisplayCard";
 import LoadingPleaseWait from "./components/LoadingPleaseWait";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
-import { Link } from "react-router-dom";
-import Pagination from "react-bootstrap/Pagination";
-import Col from "react-bootstrap/esm/Col";
 
 const API_KEY = process.env.REACT_APP_API_KEY;
 

@@ -1,6 +1,10 @@
 import { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
+import {
+  LoginStoreContext,
+  LoginStoreContextProvider,
+} from "./components/context/loginContext";
 import MainNavbar from "./components/MainNavbar";
 import GetData from "./GetData";
 import ArtistDetails from "./views/ArtistDetails";
@@ -17,13 +21,15 @@ function App() {
 
   return (
     <div className="App">
-      <MainNavbar getSearchInput={getSearchInput} />
-      <Routes>
-        <Route path="/" element={<GetData searchInput={searchInput} />} />
-        <Route path="details/:artistName" element={<ArtistDetails />} />
-        <Route path="*" element={<NothingMuch />} />
-        <Route path="LoginScreen" element={<LoginScreen />} />
-      </Routes>
+      <LoginStoreContextProvider>
+        <MainNavbar getSearchInput={getSearchInput} />
+        <Routes>
+          <Route path="/" element={<GetData searchInput={searchInput} />} />
+          <Route path="details/:artistName" element={<ArtistDetails />} />
+          <Route path="*" element={<NothingMuch />} />
+          <Route path="LoginScreen" element={<LoginScreen />} />
+        </Routes>
+      </LoginStoreContextProvider>
     </div>
   );
 }

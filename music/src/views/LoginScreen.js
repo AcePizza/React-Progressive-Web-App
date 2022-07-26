@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/esm/Container";
 import Form from "react-bootstrap/Form";
+import { LoginStoreContext } from "../components/context/loginContext";
 
 function LoginScreen() {
+  // the context data (Test)
+  const { someVariable } = useContext(LoginStoreContext);
+
   return (
     <Container>
       <Form>

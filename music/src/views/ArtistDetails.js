@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Container from "react-bootstrap/esm/Container";
 import ListGroupItem from "react-bootstrap/esm/ListGroupItem";
 import ListGroup from "react-bootstrap/ListGroup";
@@ -7,6 +7,7 @@ import Table from "react-bootstrap/Table";
 
 import { useParams } from "react-router-dom";
 import Row from "react-bootstrap/esm/Row";
+import { LoginStoreContextProvider } from "../components/context/loginContext";
 const API_KEY = process.env.REACT_APP_API_KEY;
 
 function ArtistDetails() {
