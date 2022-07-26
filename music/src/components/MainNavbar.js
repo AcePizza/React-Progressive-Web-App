@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
@@ -7,8 +8,15 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import { Link } from "react-router-dom";
 
 function MainNavbar() {
+  const [input, setInput] = useState("");
+
+  const onChangeSearchHandeler = (e) => {
+    setInput(e.target.value);
+    console.log("input >>>", input);
+  };
+
   return (
-    <Navbar bg="light" expand="lg">
+    <Navbar bg="dark" variant="dark" expand="lg">
       <Container>
         <Navbar.Brand href="#home">Discogs API Project</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -25,8 +33,17 @@ function MainNavbar() {
               placeholder="Search"
               className="me-2"
               aria-label="Search"
+              value={input}
+              onChange={onChangeSearchHandeler}
             />
-            <Button variant="outline-success">Search</Button>
+            <Button
+              variant="outline-success"
+              onClick={() => {
+                onChangeSearchHandeler(input);
+              }}
+            >
+              Search
+            </Button>
           </Form>
         </Navbar.Collapse>
       </Container>

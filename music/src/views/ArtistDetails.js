@@ -3,6 +3,7 @@ import Container from "react-bootstrap/esm/Container";
 import ListGroupItem from "react-bootstrap/esm/ListGroupItem";
 import ListGroup from "react-bootstrap/ListGroup";
 import Image from "react-bootstrap/Image";
+import Table from "react-bootstrap/Table";
 
 import { useParams } from "react-router-dom";
 import Row from "react-bootstrap/esm/Row";
@@ -29,17 +30,37 @@ function ArtistDetails() {
     fetchReleases();
   }, []);
 
+  // console.log("releases", releases);
+
   return (
     <Container>
       <p>Artist details for {artistName}</p>
       <Container>
-        <Row>
-          <ListGroup>
-            <ListGroupItem>
-              Something <img src={releases && releases.releases[0].thumb}></img>
-            </ListGroupItem>
-          </ListGroup>
-        </Row>
+        <Table striped bordered hover>
+          <thead>
+            <tr>
+              <th>Album art</th>
+              <th>Artist</th>
+              <th>Name</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <img src={releases && releases.releases[0].thumb}></img>
+              </td>
+              <td>{releases && releases.releases[0].artist}</td>
+              <td>{releases && releases.releases[0].title}</td>
+            </tr>
+            <tr>
+              <td>
+                <img src={releases && releases.releases[1].thumb}></img>
+              </td>
+              <td>Jacob</td>
+              <td>Thornton</td>
+            </tr>
+          </tbody>
+        </Table>
       </Container>
     </Container>
   );

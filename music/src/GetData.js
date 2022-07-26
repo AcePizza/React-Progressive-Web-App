@@ -46,69 +46,65 @@ function GetData() {
     pagNum();
   }, [page]);
 
-  // console.log("albumData", albumData);
-
   return (
-    <div>
-      <Container>
-        <Row>
-          <Col>
-            <Pagination>
-              <Pagination.First
-                onClick={() => {
-                  setPage(1);
-                }}
-              />
-              <Pagination.Prev
-                onClick={() => {
-                  if (page <= 1) {
-                    return null;
-                  } else {
-                    setPage(page - 1);
-                  }
-                }}
-              />
+    <Container>
+      <Row xs={1} md={2} className="g-4">
+        <Col>
+          <Pagination>
+            <Pagination.First
+              onClick={() => {
+                setPage(1);
+              }}
+            />
+            <Pagination.Prev
+              onClick={() => {
+                if (page <= 1) {
+                  return null;
+                } else {
+                  setPage(page - 1);
+                }
+              }}
+            />
 
-              <Pagination.Item active={page === first ? true : false}>
-                {first}
-              </Pagination.Item>
-              <Pagination.Item active={page === second ? true : false}>
-                {second}
-              </Pagination.Item>
-              <Pagination.Item active={page === third ? true : false}>
-                {third}
-              </Pagination.Item>
-              <Pagination.Item active={page === forth ? true : false}>
-                {forth}
-              </Pagination.Item>
-              <Pagination.Item active={page === fifth ? true : false}>
-                {fifth}
-              </Pagination.Item>
+            <Pagination.Item active={page === first ? true : false}>
+              {first}
+            </Pagination.Item>
+            <Pagination.Item active={page === second ? true : false}>
+              {second}
+            </Pagination.Item>
+            <Pagination.Item active={page === third ? true : false}>
+              {third}
+            </Pagination.Item>
+            <Pagination.Item active={page === forth ? true : false}>
+              {forth}
+            </Pagination.Item>
+            <Pagination.Item active={page === fifth ? true : false}>
+              {fifth}
+            </Pagination.Item>
 
-              <Pagination.Next
-                onClick={() => {
-                  setPage(page + 1);
-                }}
-              />
-              <Pagination.Last
-                onClick={() => {
-                  setPage(albumData.pagination.pages);
-                }}
-              />
-            </Pagination>
-          </Col>
-        </Row>
-        <Row>
-          {!albumData ? (
-            <LoadingPleaseWait />
-          ) : (
-            albumData.results.map((artist, index) => {
-              return <DisplayCard artist={artist} index={index} />;
-            })
-          )}
-        </Row>
-      </Container>
-    </div>
+            <Pagination.Next
+              onClick={() => {
+                setPage(page + 1);
+              }}
+            />
+            <Pagination.Last
+              onClick={() => {
+                setPage(albumData.pagination.pages);
+              }}
+            />
+          </Pagination>
+        </Col>
+      </Row>
+      <Row xs={1} md={2} className="g-4">
+        {!albumData ? (
+          <LoadingPleaseWait />
+        ) : (
+          albumData.results.map((artist, index) => {
+            return <DisplayCard artist={artist} index={index} />;
+          })
+        )}
+      </Row>
+    </Container>
   );
 }
 
