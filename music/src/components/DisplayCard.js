@@ -10,8 +10,7 @@ function DisplayCard({ artist, index }) {
     <Col key={index}>
       <Card
         style={{
-          width: "18rem",
-          border: "0px",
+          width: "100%",
         }}
       >
         <Card.Img variant="top" src={artist.cover_image} />
