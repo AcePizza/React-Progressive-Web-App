@@ -1,16 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { createContext } from "react";
 
 export const LoginStoreContext = createContext();
 
 export const LoginStoreContextProvider = (props) => {
-  console.log("props", props);
-  // State variables goes here
-  const someVariable = ["Super important stuff", "one", "two"];
-  console.log("someVariable", someVariable);
+  const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
 
   return (
-    <LoginStoreContext.Provider value={{ someVariable }}>
+    <LoginStoreContext.Provider value={{ isUserLoggedIn, setIsUserLoggedIn }}>
       {props.children}
     </LoginStoreContext.Provider>
   );

@@ -6,6 +6,7 @@ import {
   LoginStoreContextProvider,
 } from "./components/context/loginContext";
 import MainNavbar from "./components/MainNavbar";
+import ProtectedRoute from "./components/ProtectedRoute";
 import GetData from "./GetData";
 import ArtistDetails from "./views/ArtistDetails";
 import LoginScreen from "./views/LoginScreen";
@@ -25,7 +26,14 @@ function App() {
         <MainNavbar getSearchInput={getSearchInput} />
         <Routes>
           <Route path="/" element={<GetData searchInput={searchInput} />} />
-          <Route path="details/:artistName" element={<ArtistDetails />} />
+          <Route
+            path="details/:artistName"
+            element={
+              <ProtectedRoute>
+                <ArtistDetails />
+              </ProtectedRoute>
+            }
+          />
           <Route path="*" element={<NothingMuch />} />
           <Route path="LoginScreen" element={<LoginScreen />} />
         </Routes>
