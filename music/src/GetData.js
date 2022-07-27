@@ -3,6 +3,7 @@ import DisplayCard from "./components/DisplayCard";
 import LoadingPleaseWait from "./components/LoadingPleaseWait";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
+import { useFetchArtist } from "./components/utilities/useFetchArtist.js";
 
 const API_KEY = process.env.REACT_APP_API_KEY;
 
