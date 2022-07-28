@@ -3,56 +3,57 @@ import DisplayCard from "./components/DisplayCard";
 import LoadingPleaseWait from "./components/LoadingPleaseWait";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
-import { useFetchArtist } from "./components/utilities/useFetchArtist.js";
-
-const API_KEY = process.env.REACT_APP_API_KEY;
+import useFetchArtist from "./components/utils/useFetchArtist.js";
 
 function GetData({ searchInput }) {
-  const [albumData, setAlbumData] = useState();
+  const API_KEY = process.env.REACT_APP_API_KEY;
+  const [artistData, setArtistData] = useState(null);
+  const { fetchedData, loading } = useFetchArtist();
+  let results = []; // used for the filterArtistData function
 
-  const fetchAlbumData = async () => {
-    try {
-      const response = await fetch(
-        `https://api.discogs.com/database/search?page=1&per_page=20${API_KEY}`
-      );
-      const results = await response.json();
-      setAlbumData(results);
-    } catch (error) {
-      console.log("error", error.message);
-    }
+  console.log("artistData -> GetData : ", fetchedData);
+
+  const filterArtistData = (artistFilter) => {
+    console.log("Inside filterArtistData");
+
+    artistFilter &&
+      artistFilter.results.map((element) => {
+        let name = element.title.toUpperCase();
+        name.includes(searchInput, 0)
+          ? results.push(element)
+          : console.log("no match");
+      });
   };
 
   useEffect(() => {
-    fetchAlbumData();
-    // pagNum(); This was used by the pagination which is now moved to a different component
-  }, []);
+    setArtistData(fetchedData);
+  }, [fetchedData]);
 
-  console.log(albumData);
+  console.log("GetData -> ArtistData : ", artistData);
 
-  let results = [];
-
-  albumData &&
-    albumData.results.map((element) => {
-      let name = element.title.toUpperCase();
-      name.includes(searchInput, 0)
-        ? results.push(element)
-        : console.log("no match");
-    });
-
-  console.log("results", results);
+  // console.log("results", results);
   // Search is working just need to replace albumData in the JSX below
 
   return (
     <Container>
-      <Row xs={1} md={2} className="g-4">
-        {!albumData ? (
+      {/* <Row xs={1} md={2} className="g-4">
+        {!fetchedData ? (
           <LoadingPleaseWait />
         ) : (
-          albumData.results.map((artist, index) => {
+          fetchedData.results.map((artist, index) => {
             return <DisplayCard artist={artist} index={index} />;
           })
         )}
-      </Row>
+      </Row> */}
+      {artistData === null ? (
+        <p>artistData is Null(true){console.log("True", artistData)}</p>
+      ) : (
+        <p>
+          artistData is not Null(false)
+          {console.log("False", artistData)}
+        </p>
+      )}
+      {/* {artistData ? <p>{artistData.results[0].title}</p> : <p>Something</p>} */}
     </Container>
   );
 }

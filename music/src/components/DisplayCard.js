@@ -7,7 +7,6 @@ import { LoginStoreContext } from "../components/context/loginContext";
 function DisplayCard({ artist, index }) {
   const artistName = artist;
   const { isUserLoggedIn } = useContext(LoginStoreContext);
-  console.log("isUserLoggedIn", isUserLoggedIn);
 
   return (
     <Col key={index}>
