@@ -8,10 +8,10 @@ import useFetchArtist from "./components/utils/useFetchArtist.js";
 function GetData({ searchInput }) {
   const API_KEY = process.env.REACT_APP_API_KEY;
   const [artistData, setArtistData] = useState(null);
-  const { fetchedData, loading } = useFetchArtist();
+  const fetchedData = useFetchArtist();
   let results = []; // used for the filterArtistData function
 
-  console.log("artistData -> GetData : ", fetchedData);
+  console.log("GetData -> fetchedData : ", fetchedData);
 
   const filterArtistData = (artistFilter) => {
     console.log("Inside filterArtistData");
@@ -36,24 +36,15 @@ function GetData({ searchInput }) {
 
   return (
     <Container>
-      {/* <Row xs={1} md={2} className="g-4">
-        {!fetchedData ? (
+      <Row xs={1} md={2} className="g-4">
+        {!artistData ? (
           <LoadingPleaseWait />
         ) : (
-          fetchedData.results.map((artist, index) => {
+          artistData.results.map((artist, index) => {
             return <DisplayCard artist={artist} index={index} />;
           })
         )}
-      </Row> */}
-      {artistData === null ? (
-        <p>artistData is Null(true){console.log("True", artistData)}</p>
-      ) : (
-        <p>
-          artistData is not Null(false)
-          {console.log("False", artistData)}
-        </p>
-      )}
-      {/* {artistData ? <p>{artistData.results[0].title}</p> : <p>Something</p>} */}
+      </Row>
     </Container>
   );
 }

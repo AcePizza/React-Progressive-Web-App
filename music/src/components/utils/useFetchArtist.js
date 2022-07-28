@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 function useFetchArtist() {
-  const [fetchedData, setFetchedData] = useState({});
+  const [fetchedData, setFetchedData] = useState();
   const [loading, setLoading] = useState(true);
   const API_KEY = process.env.REACT_APP_API_KEY;
 
@@ -25,7 +25,7 @@ function useFetchArtist() {
   // fetchData();
 
   console.log("artistData inside the hook >>>", fetchedData);
-  return { fetchedData, loading };
+  return fetchedData;
 }
 
 export default useFetchArtist;
