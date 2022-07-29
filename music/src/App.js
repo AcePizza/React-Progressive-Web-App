@@ -27,7 +27,7 @@ function App() {
         <Routes>
           <Route path="/" element={<GetData searchInput={searchInput} />} />
           <Route
-            path="details/:artistName"
+            path="details/:artist"
             element={
               <ProtectedRoute>
                 <ArtistDetails />
