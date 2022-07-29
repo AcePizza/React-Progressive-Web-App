@@ -1,21 +1,21 @@
 import React, { useEffect, useState } from "react";
 
-function useFetchArtist() {
+function useFetchArtist(page) {
   const [fetchedData, setFetchedData] = useState();
-  const [loading, setLoading] = useState(true);
   const API_KEY = process.env.REACT_APP_API_KEY;
+  console.log("page before fetch : ", page);
 
-  const fetchData = async () => {
+  const fetchData = async (page) => {
     try {
       const response = await fetch(
-        `https://api.discogs.com/database/search?page=1&per_page=20${API_KEY}`
+        `https://api.discogs.com/database/search?page=${page}&per_page=20${API_KEY}`
       );
       const results = await response.json();
-      console.log("results inside the hook >>>", results);
+      console.log("useFetchArtist / fetchdata() / results : ", results);
+      console.log("Page inside fetch : ", page);
       setFetchedData(results);
-      setLoading(false);
     } catch (error) {
-      console.log("error: >> ", error.message);
+      console.log("useFetchArtist / fetchdata() / error :  ", error.message);
     }
   };
   useEffect(() => {
@@ -24,7 +24,7 @@ function useFetchArtist() {
 
   // fetchData();
 
-  console.log("artistData inside the hook >>>", fetchedData);
+  console.log("useFetchArtist / fetchedData : ", fetchedData);
   return fetchedData;
 }
 
