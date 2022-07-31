@@ -1,50 +1,63 @@
 import LoadingPleaseWait from "../components/LoadingPleaseWait";
 import React, { useContext, useEffect, useState } from "react";
 import Container from "react-bootstrap/esm/Container";
-import ListGroupItem from "react-bootstrap/esm/ListGroupItem";
-import ListGroup from "react-bootstrap/ListGroup";
-import Image from "react-bootstrap/Image";
 import Table from "react-bootstrap/Table";
-import Row from "react-bootstrap/esm/Row";
-import { LoginStoreContextProvider } from "../components/context/loginContext";
+import { LoginStoreContext } from "../components/context/loginContext";
 import useFetchArtist from "../components/utils/useFetchArtist";
 import { useParams } from "react-router-dom";
 import AlbumDisplay from "./AlbumDisplay";
-
-const API_KEY = process.env.REACT_APP_API_KEY;
 
 function ArtistDetails() {
   const [releases, setReleases] = useState();
   const [artistDetailData, setArtistDetailData] = useState(null);
   const fetchedArtistData = useFetchArtist();
+  const { isUserLoggedIn, setIsUserLoggedIn } = useContext(LoginStoreContext);
+  const API_KEY = process.env.REACT_APP_API_KEY;
 
-  let { artistId } = useParams();
+  /* the ID being sent from GetData in URL. It is defined in the route in app.js (Have a look you crook) */
+  let artistId = useParams();
+  const url = `https://api.discogs.com/artists/${artistId.artist}?${API_KEY}`;
+  const fetchArtistResource = useFetchArtist(url);
 
+  // The fetch for the albums
   const fetchReleases = async () => {
     try {
       const response = await fetch(
-        `https://api.discogs.com/artists/${artistId}/releases?${API_KEY}`
+        `https://api.discogs.com/artists/${artistId.artist}/releases?${API_KEY}`
       );
       const results = await response.json();
       setReleases(results);
     } catch (error) {
-      console.log("error", error);
+      console.log("error", error.message);
     }
   };
 
+  // So that fetchReleases only runs one time
   useEffect(() => {
     fetchReleases();
   }, []);
 
+  // When the data from the fetch hook is changed then the artist detail data is updated with the fetched results
   useEffect(() => {
     setArtistDetailData(fetchedArtistData);
   }, [fetchedArtistData]);
 
-  console.log("artistDetailData", artistDetailData);
-
   return (
     <Container>
-      <p>Artist details for</p>
+      <p>{!fetchArtistResource ? "placeholder" : fetchArtistResource.name}</p>
+      <img
+        scr={
+          !fetchArtistResource ? (
+            <p>Whats going on here</p>
+          ) : (
+            fetchArtistResource.images[0].uri
+          )
+        }
+      ></img>
+      <p>
+        Profile:{" "}
+        {!fetchArtistResource ? "placeholder" : fetchArtistResource.profile}
+      </p>
       <Table striped bordered hover>
         <thead>
           <tr>

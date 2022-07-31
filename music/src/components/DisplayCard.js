@@ -11,6 +11,7 @@ function DisplayCard({ artist, index }) {
   return (
     <Col key={index}>
       <Card
+        key={index}
         style={{
           width: "100%",
         }}

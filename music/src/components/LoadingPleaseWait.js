@@ -4,10 +4,10 @@ import Container from "react-bootstrap/esm/Container";
 import Row from "react-bootstrap/esm/Row";
 import Spinner from "react-bootstrap/Spinner";
 
-function LoadingPleaseWait() {
+function LoadingPleaseWait({ page }) {
   return (
     <>
-      <Container>
+      <Container key={page}>
         <Row>
           <Col>
             <Spinner animation="grow" />
