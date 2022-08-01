@@ -13,14 +13,7 @@ function LoginScreen() {
   return (
     <Container>
       {isUserLoggedIn ? (
-        <Button
-          variant="danger"
-          onClick={() => {
-            setIsUserLoggedIn(false);
-          }}
-        >
-          Log out
-        </Button>
+        <Button variant="danger">Log out</Button>
       ) : (
         <Form>
           <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -30,7 +23,6 @@ function LoginScreen() {
               We'll never share your email with anyone else.
             </Form.Text>
           </Form.Group>
-
           <Form.Group className="mb-3" controlId="formBasicPassword">
             <Form.Label>Password</Form.Label>
             <Form.Control type="password" placeholder="Password" />
@@ -38,15 +30,17 @@ function LoginScreen() {
           <Form.Group className="mb-3" controlId="formBasicCheckbox">
             <Form.Check type="checkbox" label="Check me out" />
           </Form.Group>
+          <Button variant="primary" type="submit">
+            Login
+          </Button>{" "}
           <Button
-            onClick={() => {
-              setIsUserLoggedIn(true);
-              redirectTo("/");
-            }}
-            variant="primary"
+            variant="info"
             type="submit"
+            onClick={() => {
+              redirectTo("/registeruser");
+            }}
           >
-            Submit
+            Create User
           </Button>
         </Form>
       )}
