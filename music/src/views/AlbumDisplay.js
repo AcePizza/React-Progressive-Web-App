@@ -9,17 +9,15 @@ import useFetchArtist from "../components/utils/useFetchArtist";
 
 function AlbumDisplay({ element, index }) {
   return (
-    <>
-      <tbody>
-        <tr>
-          <td>
-            <img width={"50px"} height={"50px"} src={element.thumb}></img>
-          </td>
-          <td>{element.title}</td>
-          <td>{element.year}</td>
-        </tr>
-      </tbody>
-    </>
+    <tbody key={index}>
+      <tr>
+        <td>
+          <img width={"50px"} height={"50px"} src={element.thumb}></img>
+        </td>
+        <td>{element.title}</td>
+        <td>{element.year}</td>
+      </tr>
+    </tbody>
   );
 }
 

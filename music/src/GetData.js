@@ -28,6 +28,8 @@ function GetData({ searchInput }) {
       });
   };
 
+  console.log("Navbar - searchInput : ", searchInput);
+
   useEffect(() => {
     setArtistData(fetchedData);
   }, [fetchedData]);

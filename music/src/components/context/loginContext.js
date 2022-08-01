@@ -4,7 +4,7 @@ import { createContext } from "react";
 export const LoginStoreContext = createContext();
 
 export const LoginStoreContextProvider = (props) => {
-  const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
+  const [isUserLoggedIn, setIsUserLoggedIn] = useState();
 
   return (
     <LoginStoreContext.Provider value={{ isUserLoggedIn, setIsUserLoggedIn }}>
