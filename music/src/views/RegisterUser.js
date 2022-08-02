@@ -4,7 +4,6 @@ import Container from "react-bootstrap/esm/Container";
 import Form from "react-bootstrap/Form";
 import { useNavigate } from "react-router-dom";
 import { LoginStoreContext } from "../components/context/loginContext";
-import { auth } from "../config/config";
 
 function RegisterUser() {
   const [email, setEmail] = useState("");

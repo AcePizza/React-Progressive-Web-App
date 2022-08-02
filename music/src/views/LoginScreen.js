@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/esm/Container";
 import Form from "react-bootstrap/Form";
@@ -9,6 +9,23 @@ function LoginScreen() {
   // the context data (Test). The Value from this is not set globally
   const { isUserLoggedIn, setIsUserLoggedIn } = useContext(LoginStoreContext);
   const redirectTo = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const { login } = useContext(LoginStoreContext);
+
+  const loginEmailInputHandeler = (e) => {
+    setEmail(e.target.value);
+  };
+
+  const loginPasswordInputHandeler = (e) => {
+    setPassword(e.target.value);
+  };
+
+  const loginNewUserHandeler = () => {
+    login(email, password);
+  };
+
+  console.log("the values sent to google : ", email, password);
 
   return (
     <Container>
@@ -16,26 +33,30 @@ function LoginScreen() {
         <Button variant="danger">Log out</Button>
       ) : (
         <Form>
+          <h4>Please enter your login credentials</h4>
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label>Email address</Form.Label>
-            <Form.Control type="email" placeholder="Enter email" />
-            <Form.Text className="text-muted">
-              We'll never share your email with anyone else.
-            </Form.Text>
+            <Form.Control
+              type="email"
+              placeholder="Enter email"
+              value={email}
+              onChange={loginEmailInputHandeler}
+            />
           </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicPassword">
             <Form.Label>Password</Form.Label>
-            <Form.Control type="password" placeholder="Password" />
+            <Form.Control
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={loginPasswordInputHandeler}
+            />
           </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicCheckbox">
-            <Form.Check type="checkbox" label="Check me out" />
-          </Form.Group>
-          <Button variant="primary" type="submit">
+          <Button variant="primary" onClick={loginNewUserHandeler}>
             Login
           </Button>{" "}
           <Button
             variant="info"
-            type="submit"
             onClick={() => {
               redirectTo("/registeruser");
             }}
