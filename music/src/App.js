@@ -10,6 +10,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import { app } from "./config/config";
 import GetData from "./GetData";
 import ArtistDetails from "./views/ArtistDetails";
+import ChatPage from "./views/ChatPage";
 import LoginScreen from "./views/LoginScreen";
 import NothingMuch from "./views/NothingMuch";
 import RegisterUser from "./views/RegisterUser";
@@ -39,6 +40,7 @@ function App() {
           <Route path="*" element={<NothingMuch />} />
           <Route path="registeruser" element={<RegisterUser />} />
           <Route path="LoginScreen" element={<LoginScreen />} />
+          <Route path="chatpage" element={<ChatPage />} />
         </Routes>
       </LoginStoreContextProvider>
     </div>

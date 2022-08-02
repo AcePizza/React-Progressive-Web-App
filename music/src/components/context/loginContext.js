@@ -48,6 +48,18 @@ export const LoginStoreContextProvider = (props) => {
     }
   };
 
+  const signedInUser = () => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const uid = user.uid;
+      } else {
+        console.log("something else");
+      }
+    });
+  };
+
+  // Check if user is signed in
+
   return (
     <LoginStoreContext.Provider
       value={{
