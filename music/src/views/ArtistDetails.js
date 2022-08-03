@@ -44,7 +44,9 @@ function ArtistDetails() {
     setArtistDetailData(fetchedArtistData);
   }, [fetchedArtistData]);
 
-  console.log("isUserLoggedin value : ", isUserLoggedIn);
+  fetchedArtistData
+    ? console.log("nothing")
+    : console.log("Here is the object", fetchArtistResource);
 
   return (
     <Container>
@@ -65,7 +67,7 @@ function ArtistDetails() {
             fetchArtistResource.images[0].uri
           )
         }
-        alt={"artist name"}
+        alt={"Alternative text"}
       ></img>
       <Row>
         <Col>
