@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import DisplayCard from "./components/DisplayCard";
 import LoadingPleaseWait from "./components/LoadingPleaseWait";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import useFetchArtist from "./components/utils/useFetchArtist.js";
 import PaginationComponenet from "./components/PaginationComponent.js";
+import { LoginStoreContext } from "./components/context/loginContext";
 
 function GetData({ searchInput }) {
   const [page, setPage] = useState(null);
@@ -15,6 +16,7 @@ function GetData({ searchInput }) {
   }&per_page=20${API_KEY}`;
   const fetchedData = useFetchArtist(url, page);
   let results = []; // used for the filterArtistData function
+  const { isUserLoggedIn } = useContext(LoginStoreContext);
 
   const filterArtistData = (artistFilter) => {
     console.log("Inside filterArtistData");
@@ -36,6 +38,8 @@ function GetData({ searchInput }) {
 
   // console.log("results", results);
   // Search is working just need to replace albumData in the JSX below
+
+  console.log("isUserLoggedIn : ", isUserLoggedIn);
 
   return (
     <Container>

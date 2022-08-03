@@ -11,7 +11,7 @@ export const LoginStoreContext = createContext();
 
 export const LoginStoreContextProvider = (props) => {
   //  This value is use to check if the user is singned in in the protected route
-  const [isUserLoggedIn, setIsUserLoggedIn] = useState();
+  const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
 
   // Register new user
   const register = async (email, password) => {
@@ -21,7 +21,7 @@ export const LoginStoreContextProvider = (props) => {
         email,
         password
       );
-      setIsUserLoggedIn(userCredential.user);
+      setIsUserLoggedIn(true);
     } catch (error) {
       const errorCode = error.code;
       const errorMessage = error.message;
@@ -30,7 +30,7 @@ export const LoginStoreContextProvider = (props) => {
     }
   };
 
-  // Written asyn await (Gives same error)
+  // Signin user with email
   const login = async (email, password) => {
     try {
       const userCredential = await signInWithEmailAndPassword(
@@ -38,7 +38,7 @@ export const LoginStoreContextProvider = (props) => {
         email,
         password
       );
-      setIsUserLoggedIn(userCredential.user);
+      setIsUserLoggedIn(true);
     } catch (error) {
       setIsUserLoggedIn(null);
       const errorCode = error.code;

@@ -11,6 +11,7 @@ import { app } from "./config/config";
 import GetData from "./GetData";
 import ArtistDetails from "./views/ArtistDetails";
 import ChatPage from "./views/ChatPage";
+import LandingPage from "./views/LandingPage";
 import LoginScreen from "./views/LoginScreen";
 import NothingMuch from "./views/NothingMuch";
 import RegisterUser from "./views/RegisterUser";
@@ -28,9 +29,10 @@ function App() {
       <LoginStoreContextProvider>
         <MainNavbar getSearchInput={getSearchInput} />
         <Routes>
-          <Route path="/" element={<GetData searchInput={searchInput} />} />
+          <Route path="/" element={<LandingPage />} />
+          <Route path="home" element={<GetData searchInput={searchInput} />} />
           <Route
-            path="details/:artist"
+            path="home/details/:artist"
             element={
               <ProtectedRoute>
                 <ArtistDetails />

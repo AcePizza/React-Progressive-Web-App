@@ -6,6 +6,7 @@ import { LoginStoreContext } from "./context/loginContext";
 
 function ProtectedRoute(children) {
   const { isUserLoggedIn } = useContext(LoginStoreContext);
+  console.log("What is the value of user", isUserLoggedIn);
 
   return (
     <Container>

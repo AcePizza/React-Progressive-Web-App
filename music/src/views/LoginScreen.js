@@ -13,6 +13,8 @@ function LoginScreen() {
   const [password, setPassword] = useState("");
   const { login } = useContext(LoginStoreContext);
 
+  console.log("isUserLoggedIn : ", isUserLoggedIn);
+
   const loginEmailInputHandeler = (e) => {
     setEmail(e.target.value);
   };
@@ -24,8 +26,6 @@ function LoginScreen() {
   const loginNewUserHandeler = () => {
     login(email, password);
   };
-
-  console.log("the values sent to google : ", email, password);
 
   return (
     <Container>
