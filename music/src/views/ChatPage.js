@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Container from "react-bootstrap/esm/Container";
 import Toast from "react-bootstrap/Toast";
 import { db } from "../config/config";
@@ -6,10 +6,15 @@ import { collection, addDoc, getDocs, query } from "firebase/firestore";
 import LoadingPleaseWait from "../components/LoadingPleaseWait";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import { LoginStoreContext } from "../components/context/loginContext";
 
 function ChatPage() {
   const [messages, setMessages] = useState(null);
+  const [newMessage, setNewMessage] = useState("");
 
+  const { signedInUser, whoIsUser } = useContext(LoginStoreContext);
+
+  // Checkes the messages which are stored in the DB
   const checkMessagesFromDB = async () => {
     const messageArray = [];
     const querySnapshot = await getDocs(collection(db, "chat"));
@@ -18,6 +23,15 @@ function ChatPage() {
       messageArray.push(doc.data());
     });
     setMessages(messageArray);
+  };
+
+  const onChangeMessageHandler = (e) => {
+    setNewMessage(e.target.value);
+  };
+
+  const onClickMessageHandler = () => {
+    signedInUser();
+    console.log("This is the user", whoIsUser);
   };
 
   useEffect(() => {
@@ -55,9 +69,16 @@ function ChatPage() {
       <Form>
         <Form.Group className="mb-3" controlId="formBasicPassword">
           <Form.Label>Message</Form.Label>
-          <Form.Control type="text" placeholder="Write a message..." />
+          <Form.Control
+            type="text"
+            placeholder="Write a message..."
+            value={newMessage}
+            onChange={onChangeMessageHandler}
+          />
         </Form.Group>
-        <Button variant="primary">Submit</Button>
+        <Button variant="primary" onClick={onClickMessageHandler}>
+          Submit
+        </Button>
       </Form>
     </Container>
   );

@@ -12,6 +12,7 @@ export const LoginStoreContext = createContext();
 export const LoginStoreContextProvider = (props) => {
   //  This value is use to check if the user is singned in in the protected route
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
+  const [whoIsUser, setWhoIsUser] = useState(null);
 
   // Register new user
   const register = async (email, password) => {
@@ -48,17 +49,20 @@ export const LoginStoreContextProvider = (props) => {
     }
   };
 
+  // Check if user is signed in
+
   const signedInUser = () => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        const uid = user.uid;
+        const uid = user.email;
+        console.log("The user is logged in Firebase");
+        setWhoIsUser(uid);
+        setIsUserLoggedIn(true);
       } else {
-        console.log("something else");
+        console.log("The user is NOT logged into Firebase");
       }
     });
   };
-
-  // Check if user is signed in
 
   return (
     <LoginStoreContext.Provider
@@ -67,6 +71,8 @@ export const LoginStoreContextProvider = (props) => {
         setIsUserLoggedIn,
         register,
         login,
+        signedInUser,
+        whoIsUser,
       }}
     >
       {props.children}
