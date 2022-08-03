@@ -16,42 +16,72 @@ function PaginationComponent({ page, setPage }) {
   }, [page]);
 
   return (
-    <Row xs={1} md={2} className="g-4">
-      <Col>
-        <Pagination>
-          <Pagination.First
-            onClick={() => {
-              setPage(1);
-            }}
-          />
-          <Pagination.Prev
-            onClick={() => {
-              setPage(page - 1);
-            }}
-          />
+    <Row>
+      <Col xs>
+        <Pagination size="sm">
+          <Col>
+            {" "}
+            <Pagination.First
+              onClick={() => {
+                setPage(1);
+              }}
+            />
+          </Col>
+          <Col>
+            {" "}
+            <Pagination.Prev
+              onClick={() => {
+                setPage(page - 1);
+              }}
+            />
+          </Col>
+          <Col>
+            {" "}
+            <Pagination.Item active={page === ellipsisValue - 4 ? true : false}>
+              {ellipsisValue - 4}
+            </Pagination.Item>
+          </Col>
+          <Col>
+            {" "}
+            <Pagination.Item active={page === ellipsisValue - 3 ? true : false}>
+              {ellipsisValue - 3}
+            </Pagination.Item>
+          </Col>
 
-          <Pagination.Item active={page === ellipsisValue - 4 ? true : false}>
-            {ellipsisValue - 4}
-          </Pagination.Item>
-          <Pagination.Item active={page === ellipsisValue - 3 ? true : false}>
-            {ellipsisValue - 3}
-          </Pagination.Item>
-          <Pagination.Item active={page === ellipsisValue - 2 ? true : false}>
-            {ellipsisValue - 2}
-          </Pagination.Item>
-          <Pagination.Item active={page === ellipsisValue - 1 ? true : false}>
-            {ellipsisValue - 1}
-          </Pagination.Item>
-          <Pagination.Item active={page === ellipsisValue ? true : false}>
-            {ellipsisValue}
-          </Pagination.Item>
+          <Col>
+            {" "}
+            <Pagination.Item active={page === ellipsisValue - 2 ? true : false}>
+              {ellipsisValue - 2}
+            </Pagination.Item>
+          </Col>
 
-          <Pagination.Next
-            onClick={() => {
-              setPage(page + 1);
-            }}
-          />
-          <Pagination.Last />
+          <Col>
+            {" "}
+            <Pagination.Item active={page === ellipsisValue - 1 ? true : false}>
+              {ellipsisValue - 1}
+            </Pagination.Item>
+          </Col>
+
+          <Col>
+            {" "}
+            <Pagination.Item active={page === ellipsisValue ? true : false}>
+              {ellipsisValue}
+            </Pagination.Item>
+          </Col>
+
+          <Col>
+            {" "}
+            <Pagination.Next
+              onClick={() => {
+                setPage(page + 1);
+              }}
+            />
+          </Col>
+
+          <Col>
+            {" "}
+            <Pagination.Last />
+          </Col>
         </Pagination>
       </Col>
     </Row>
