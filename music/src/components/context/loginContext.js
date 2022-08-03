@@ -3,7 +3,7 @@ import {
   onAuthStateChanged,
   signInWithEmailAndPassword,
 } from "firebase/auth";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { createContext } from "react";
 import { auth } from "../../config/config";
 
@@ -11,7 +11,8 @@ export const LoginStoreContext = createContext();
 
 export const LoginStoreContextProvider = (props) => {
   //  This value is use to check if the user is singned in in the protected route
-  const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
+  const [isUserLoggedIn, setIsUserLoggedIn] = useState();
+  // This value is set by the check if user is logged in function and is used when a new message is added to the DB
   const [whoIsUser, setWhoIsUser] = useState(null);
 
   // Register new user
@@ -41,7 +42,7 @@ export const LoginStoreContextProvider = (props) => {
       );
       setIsUserLoggedIn(true);
     } catch (error) {
-      setIsUserLoggedIn(null);
+      setIsUserLoggedIn(false);
       const errorCode = error.code;
       const errorMessage = error.message;
       console.log("Error code :", errorCode);
@@ -63,6 +64,10 @@ export const LoginStoreContextProvider = (props) => {
       }
     });
   };
+
+  useEffect(() => {
+    signedInUser();
+  }, []);
 
   return (
     <LoginStoreContext.Provider
