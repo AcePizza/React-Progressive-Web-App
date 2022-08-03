@@ -6,6 +6,7 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import { Link } from "react-router-dom";
+import discogsLogo from "../assets/discogs-white.png";
 
 function MainNavbar({ getSearchInput }) {
   const [input, setInput] = useState("");
@@ -18,13 +19,19 @@ function MainNavbar({ getSearchInput }) {
     <>
       <Navbar bg="dark" variant="dark" expand="lg">
         <Container>
-          <Navbar.Brand href="/home">Discogs API Project</Navbar.Brand>
+          <Navbar.Brand href="/home">
+            <img
+              src={discogsLogo}
+              style={{
+                height: "25px",
+                width: "100%",
+              }}
+            ></img>
+          </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="me-auto">
+            <Nav className="me-auto my-2 my-lg-0">
               <Nav.Link href="/home">Home</Nav.Link>
-            </Nav>
-            <Nav className="me-auto">
               <Nav.Link href="/LoginScreen">Login</Nav.Link>
             </Nav>
             <Form className="d-flex">
@@ -37,7 +44,7 @@ function MainNavbar({ getSearchInput }) {
                 onChange={onChangeSearchHandeler}
               />
               <Button
-                variant="outline-success"
+                variant="primary"
                 onClick={() => {
                   getSearchInput(input);
                 }}
