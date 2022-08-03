@@ -5,8 +5,10 @@ import ArtistDetails from "../views/ArtistDetails";
 import { LoginStoreContext } from "./context/loginContext";
 
 function ProtectedRoute(children) {
-  const { isUserLoggedIn } = useContext(LoginStoreContext);
+  const { isUserLoggedIn, signedInUser } = useContext(LoginStoreContext);
   console.log("What is the value of user", isUserLoggedIn);
+
+  signedInUser();
 
   return (
     <Container>
