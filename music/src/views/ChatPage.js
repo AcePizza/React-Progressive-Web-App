@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import Container from "react-bootstrap/esm/Container";
 import Toast from "react-bootstrap/Toast";
 import { db } from "../config/config";
-import { collection, addDoc, getDocs, query } from "firebase/firestore";
+import { collection, addDoc, getDocs, query, docRef } from "firebase/firestore";
 import LoadingPleaseWait from "../components/LoadingPleaseWait";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
@@ -20,7 +20,7 @@ function ChatPage() {
     const messageArray = [];
     const querySnapshot = await getDocs(collection(db, "chat"));
     querySnapshot.forEach((doc) => {
-      // console.log(`${doc.id} => ${doc.data()}`);
+      console.log(`${doc.id} => ${doc.data()}`);
       messageArray.push(doc.data());
     });
     setMessages(messageArray);
@@ -30,14 +30,22 @@ function ChatPage() {
     setNewMessage(e.target.value);
   };
 
-  const onClickMessageHandler = () => {
-    signedInUser();
-    console.log("This is the user", whoIsUser);
+  const onClickMessageHandler = async () => {
+    whoIsUser ? <LoadingPleaseWait /> : signedInUser();
+    const docRef = await addDoc(collection(db, "chat"), {
+      author: whoIsUser,
+      text: newMessage,
+      time: new Date(),
+    });
   };
 
   useEffect(() => {
     checkMessagesFromDB();
   }, []);
+
+  messages
+    ? console.log(new Date(messages[0].time.seconds * 1000))
+    : console.log("this is not true");
 
   return (
     <Container>
@@ -50,13 +58,8 @@ function ChatPage() {
               <Col key={index}>
                 <Toast>
                   <Toast.Header>
-                    <img
-                      src="holder.js/20x20?text=%20"
-                      className="rounded me-2"
-                      alt=""
-                    />
                     <strong className="me-auto">{message.author}</strong>
-                    <small>11 mins ago</small>
+                    <small>somethings</small>
                   </Toast.Header>
                   <Toast.Body>{message.text}</Toast.Body>
                 </Toast>
