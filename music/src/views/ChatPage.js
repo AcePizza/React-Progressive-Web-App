@@ -7,6 +7,7 @@ import LoadingPleaseWait from "../components/LoadingPleaseWait";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { LoginStoreContext } from "../components/context/loginContext";
+import { Col, Row } from "react-bootstrap";
 
 function ChatPage() {
   const [messages, setMessages] = useState(null);
@@ -19,7 +20,7 @@ function ChatPage() {
     const messageArray = [];
     const querySnapshot = await getDocs(collection(db, "chat"));
     querySnapshot.forEach((doc) => {
-      console.log(`${doc.id} => ${doc.data()}`);
+      // console.log(`${doc.id} => ${doc.data()}`);
       messageArray.push(doc.data());
     });
     setMessages(messageArray);
@@ -40,32 +41,32 @@ function ChatPage() {
 
   return (
     <Container>
-      {!messages
-        ? console.log("there is nothing")
-        : console.log("there is the object : ", messages)}
-      {!messages ? (
-        <LoadingPleaseWait />
-      ) : (
-        messages.map((message, index) => {
-          return (
-            <>
-              <Toast>
-                <Toast.Header>
-                  <img
-                    src="holder.js/20x20?text=%20"
-                    className="rounded me-2"
-                    alt=""
-                  />
-                  <strong className="me-auto">{message.author}</strong>
-                  <small>11 mins ago</small>
-                </Toast.Header>
-                <Toast.Body>{message.text}</Toast.Body>
-              </Toast>
-              <br></br>
-            </>
-          );
-        })
-      )}
+      <Row>
+        {!messages ? (
+          <LoadingPleaseWait />
+        ) : (
+          messages.map((message, index) => {
+            return (
+              <Col key={index}>
+                <Toast>
+                  <Toast.Header>
+                    <img
+                      src="holder.js/20x20?text=%20"
+                      className="rounded me-2"
+                      alt=""
+                    />
+                    <strong className="me-auto">{message.author}</strong>
+                    <small>11 mins ago</small>
+                  </Toast.Header>
+                  <Toast.Body>{message.text}</Toast.Body>
+                </Toast>
+                <br></br>
+              </Col>
+            );
+          })
+        )}
+      </Row>
+
       <Form>
         <Form.Group className="mb-3" controlId="formBasicPassword">
           <Form.Label>Message</Form.Label>
