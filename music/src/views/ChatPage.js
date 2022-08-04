@@ -2,10 +2,20 @@ import React, { useContext, useEffect, useState } from "react";
 import Container from "react-bootstrap/esm/Container";
 import Toast from "react-bootstrap/Toast";
 import { db } from "../config/config";
-import { collection, addDoc, getDocs, query, docRef } from "firebase/firestore";
+import {
+  collection,
+  addDoc,
+  getDocs,
+  doc,
+  query,
+  docRef,
+  deleteDoc,
+  connectFirestoreEmulator,
+} from "firebase/firestore";
 import LoadingPleaseWait from "../components/LoadingPleaseWait";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import ToastContainer from "react-bootstrap/ToastContainer";
 import { LoginStoreContext } from "../components/context/loginContext";
 import { Col, Row } from "react-bootstrap";
 
@@ -46,6 +56,7 @@ function ChatPage() {
 
   // adds a new message to the database
   const onClickMessageHandler = async () => {
+    console.log("Clicky click");
     // Check to see if there is a use loggedin (Maybe this is not usefull)
     whoIsUser ? <LoadingPleaseWait /> : signedInUser();
 
@@ -57,22 +68,20 @@ function ChatPage() {
   };
 
   // This handles the deletion of a message in the database
-  const onCloseMessageHandeler = (messageid) => {
-    console.log("this will close the message");
-    console.log("The id from the emement", messageid);
+  const onCloseMessageHandeler = async (messageid) => {
+    console.log("The id from the emement", messageid.target.id);
+    await deleteDoc(doc(db, "chat", messageid.target.id));
   };
 
   useEffect(() => {
     checkMessagesFromDB();
-  }, []);
-
-  useEffect(() => {
-    onCloseMessageHandeler();
   }, [onCloseMessageHandeler]);
 
-  // messages
-  //   ? console.log(new Date(messages[0].time.seconds * 1000))
-  //   : console.log("this is not true");
+  useEffect(() => {
+    console.log("whoIsTheUser", whoIsUser);
+  }, []);
+
+  //
 
   return (
     <Container>
@@ -83,13 +92,47 @@ function ChatPage() {
           messages.map((message, index) => {
             return (
               <Col key={index}>
-                <Toast onClose={onCloseMessageHandeler(message.id)}>
-                  <Toast.Header>
-                    <strong className="me-auto">{message.author}</strong>
-                    <small>{message.time}</small>
-                  </Toast.Header>
-                  <Toast.Body>{message.text}</Toast.Body>
-                </Toast>
+                {message.author === whoIsUser ? (
+                  <Toast bg="info">
+                    <Toast.Header closeButton={false}>
+                      <strong className="me-auto">{message.author}</strong>
+                      <small>{message.time}</small>
+                    </Toast.Header>
+                    <Toast.Body>
+                      <Col>{message.text}</Col>
+                      <Col>
+                        <Button
+                          id={message.id}
+                          variant="primary"
+                          size="sm"
+                          onClick={onCloseMessageHandeler}
+                        >
+                          Delete
+                        </Button>
+                      </Col>
+                    </Toast.Body>
+                  </Toast>
+                ) : (
+                  <Toast>
+                    <Toast.Header closeButton={false}>
+                      <strong className="me-auto">{message.author}</strong>
+                      <small>{message.time}</small>
+                    </Toast.Header>
+                    <Toast.Body>
+                      <Col>{message.text}</Col>
+                      <Col>
+                        <Button
+                          id={message.id}
+                          variant="primary"
+                          size="sm"
+                          onClick={onCloseMessageHandeler}
+                        >
+                          Delete
+                        </Button>
+                      </Col>
+                    </Toast.Body>
+                  </Toast>
+                )}
                 <br></br>
               </Col>
             );
