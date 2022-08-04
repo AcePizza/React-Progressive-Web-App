@@ -44,10 +44,6 @@ function ArtistDetails() {
     setArtistDetailData(fetchedArtistData);
   }, [fetchedArtistData]);
 
-  !fetchedArtistData
-    ? console.log("nothing")
-    : console.log("Here is the object", fetchArtistResource);
-
   return (
     <Container>
       <h4>

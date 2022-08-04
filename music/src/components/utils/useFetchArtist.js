@@ -9,7 +9,7 @@ function useFetchArtist(url, page) {
   const useURL = `${url}`;
 
   const fetchData = async (a, b) => {
-    // console.log("useURL", useURL);
+    console.log("useFetchArtist - useURL : ", useURL);
 
     try {
       const response = await fetch(useURL);
