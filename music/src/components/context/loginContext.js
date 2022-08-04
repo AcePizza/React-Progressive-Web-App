@@ -1,7 +1,9 @@
+import { async } from "@firebase/util";
 import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
   signInWithEmailAndPassword,
+  signOut,
 } from "firebase/auth";
 import React, { useEffect, useState } from "react";
 import { createContext } from "react";
@@ -65,6 +67,16 @@ export const LoginStoreContextProvider = (props) => {
     });
   };
 
+  const logout = async () => {
+    try {
+      const singout = await signOut(auth);
+      setIsUserLoggedIn(false);
+    } catch (error) {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+    }
+  };
+
   useEffect(() => {
     signedInUser();
   }, []);
@@ -76,6 +88,7 @@ export const LoginStoreContextProvider = (props) => {
         setIsUserLoggedIn,
         register,
         login,
+        logout,
         signedInUser,
         whoIsUser,
       }}
