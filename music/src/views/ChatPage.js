@@ -32,6 +32,7 @@ function ChatPage() {
 
   const onClickMessageHandler = async () => {
     whoIsUser ? <LoadingPleaseWait /> : signedInUser();
+
     const docRef = await addDoc(collection(db, "chat"), {
       author: whoIsUser,
       text: newMessage,
