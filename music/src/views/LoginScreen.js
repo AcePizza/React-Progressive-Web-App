@@ -7,7 +7,8 @@ import { LoginStoreContext } from "../components/context/loginContext";
 
 function LoginScreen() {
   // the context data (Test). The Value from this is not set globally
-  const { isUserLoggedIn, setIsUserLoggedIn } = useContext(LoginStoreContext);
+  const { isUserLoggedIn, setIsUserLoggedIn, logout } =
+    useContext(LoginStoreContext);
   const redirectTo = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -27,10 +28,16 @@ function LoginScreen() {
     login(email, password);
   };
 
+  const logOutUser = () => {
+    logout();
+  };
+
   return (
     <Container>
       {isUserLoggedIn ? (
-        <Button variant="danger">Log out</Button>
+        <Button variant="danger" onClick={logOutUser}>
+          Log out
+        </Button>
       ) : (
         <Form>
           <h4>Please enter your login credentials</h4>
