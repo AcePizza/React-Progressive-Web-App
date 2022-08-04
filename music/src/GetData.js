@@ -15,31 +15,38 @@ function GetData({ searchInput }) {
     !page ? 1 : page
   }&per_page=20${API_KEY}`;
   const fetchedData = useFetchArtist(url, page);
-  let results = []; // used for the filterArtistData function
+
+  const [filterResults, setFilterResults] = useState();
+
+  // access to the conditional store value to check if user is currently loggedin (can be removed at some point)
   const { isUserLoggedIn } = useContext(LoginStoreContext);
 
-  const filterArtistData = (artistFilter) => {
-    console.log("Inside filterArtistData");
-
-    artistFilter &&
-      artistFilter.results.map((element) => {
+  // The search filter (Needs to be activated)
+  const filterArtistData = (artistData) => {
+    console.log("Inside filterArtistData", artistData);
+    let results = [];
+    artistData &&
+      artistData.results.map((element) => {
         let name = element.title.toUpperCase();
         name.includes(searchInput, 0)
           ? results.push(element)
           : console.log("no match");
       });
+    setFilterResults(results);
   };
-
-  // console.log("Navbar - searchInput : ", searchInput);
 
   useEffect(() => {
     setArtistData(fetchedData);
   }, [fetchedData]);
 
+  useEffect(() => {
+    filterArtistData(fetchedData);
+  }, [searchInput]);
+
+  console.log("results", filterResults);
+
   // console.log("results", results);
   // Search is working just need to replace albumData in the JSX below
-
-  console.log("isUserLoggedIn : ", isUserLoggedIn);
 
   return (
     <Container>
