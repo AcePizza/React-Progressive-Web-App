@@ -8,6 +8,7 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import { Link } from "react-router-dom";
 import discogsLogo from "../assets/discogs-white.png";
 import { LoginStoreContext } from "./context/loginContext";
+import "./MainNavbar.css";
 
 function MainNavbar({ getSearchInput }) {
   const [input, setInput] = useState("");
@@ -56,24 +57,26 @@ function MainNavbar({ getSearchInput }) {
               <Nav.Link href="/LoginScreen">Login</Nav.Link>
               {disabledPathIfUserIsLoggedIn()}
             </Nav>
-            <Form className="d-flex">
-              <Form.Control
-                type="search"
-                placeholder="Search"
-                className="me-2"
-                aria-label="Search"
-                value={input}
-                onChange={onChangeSearchHandeler}
-              />
-              <Button
-                variant="primary"
-                onClick={() => {
-                  getSearchInput(input);
-                }}
-              >
-                Search
-              </Button>
-            </Form>
+            {window.location.href === "http://localhost:3000/home" && (
+              <Form className="d-flex">
+                <Form.Control
+                  type="search"
+                  placeholder="Search"
+                  className="me-2"
+                  aria-label="Search"
+                  value={input}
+                  onChange={onChangeSearchHandeler}
+                />
+                <Button
+                  variant="primary"
+                  onClick={() => {
+                    getSearchInput(input);
+                  }}
+                >
+                  Search
+                </Button>
+              </Form>
+            )}
           </Navbar.Collapse>
         </Container>
       </Navbar>

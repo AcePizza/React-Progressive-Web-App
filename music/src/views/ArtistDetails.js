@@ -54,17 +54,20 @@ function ArtistDetails() {
         )}
       </h4>
       <img
-        height={"100px"}
-        width={"100px"}
-        scr={
+        height={"100%"}
+        width={"100%"}
+        src={
           !fetchArtistResource ? (
             <LoadingPleaseWait />
           ) : (
             fetchArtistResource.images[0].uri
           )
         }
-        alt={"Alternative text"}
-      ></img>
+        alt={
+          !fetchArtistResource ? "Nothing to display" : fetchArtistResource.name
+        }
+        style={{ borderRadius: "5px" }}
+      ></img>{" "}
       <Row>
         <Col>
           Profile:{" "}

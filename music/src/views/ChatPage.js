@@ -27,6 +27,7 @@ function ChatPage() {
 
   // Checkes the messages which are stored in the DB
   const checkMessagesFromDB = async () => {
+    console.log("checkMessagesFromDB runs...");
     let messageArray = [];
     const querySnapshot = await getDocs(collection(db, "chat"));
     querySnapshot.forEach((doc) => {
@@ -45,8 +46,13 @@ function ChatPage() {
       // Pushing the element into an object
       messageArray.push(arr);
     });
+
     // Setting the state variable to the constructed object
-    setMessages(messageArray);
+    setMessages(
+      messageArray.sort(function (x, y) {
+        return x.time - y.time;
+      })
+    );
   };
 
   // The new message constructor
@@ -65,23 +71,23 @@ function ChatPage() {
       text: newMessage,
       time: new Date(),
     });
+    checkMessagesFromDB();
   };
 
   // This handles the deletion of a message in the database
   const onCloseMessageHandeler = async (messageid) => {
     console.log("The id from the emement", messageid.target.id);
     await deleteDoc(doc(db, "chat", messageid.target.id));
+    checkMessagesFromDB();
   };
 
   useEffect(() => {
     checkMessagesFromDB();
-  }, [onCloseMessageHandeler]);
+  }, []);
 
   useEffect(() => {
     console.log("whoIsTheUser", whoIsUser);
   }, []);
-
-  //
 
   return (
     <Container>

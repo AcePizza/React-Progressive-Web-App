@@ -47,6 +47,7 @@ function GetData({ searchInput }) {
 
   // console.log("results", results);
   // Search is working just need to replace albumData in the JSX below
+  console.log(window.location.href);
 
   return (
     <Container>

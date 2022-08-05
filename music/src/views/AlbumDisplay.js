@@ -1,11 +1,4 @@
 import React, { useContext, useEffect, useState } from "react";
-import Container from "react-bootstrap/esm/Container";
-import ListGroupItem from "react-bootstrap/esm/ListGroupItem";
-import ListGroup from "react-bootstrap/ListGroup";
-import Image from "react-bootstrap/Image";
-import Table from "react-bootstrap/Table";
-import Row from "react-bootstrap/esm/Row";
-import useFetchArtist from "../components/utils/useFetchArtist";
 
 function AlbumDisplay({ element, index }) {
   return (
