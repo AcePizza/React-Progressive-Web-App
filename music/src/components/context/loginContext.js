@@ -58,11 +58,10 @@ export const LoginStoreContextProvider = (props) => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         const uid = user.email;
-        console.log("The user is logged in Firebase");
         setWhoIsUser(uid);
         setIsUserLoggedIn(true);
       } else {
-        console.log("The user is NOT logged into Firebase");
+        return false;
       }
     });
   };
