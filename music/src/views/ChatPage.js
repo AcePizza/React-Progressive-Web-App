@@ -126,16 +126,7 @@ function ChatPage() {
                     </Toast.Header>
                     <Toast.Body>
                       <Col>{message.text}</Col>
-                      <Col>
-                        <Button
-                          id={message.id}
-                          variant="primary"
-                          size="sm"
-                          onClick={onCloseMessageHandeler}
-                        >
-                          Delete
-                        </Button>
-                      </Col>
+                      <Col></Col>
                     </Toast.Body>
                   </Toast>
                 )}
