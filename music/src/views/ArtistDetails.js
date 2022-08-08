@@ -8,6 +8,9 @@ import AlbumDisplay from "./AlbumDisplay";
 import Row from "react-bootstrap/esm/Row";
 import Col from "react-bootstrap/esm/Col";
 import { LoginStoreContext } from "../components/context/loginContext";
+import { LikeContext } from "../components/context/likeContext";
+import ToggleButton from "react-bootstrap/ToggleButton";
+import ToggleButtonGroup from "react-bootstrap/ToggleButtonGroup";
 
 function ArtistDetails() {
   const [releases, setReleases] = useState();
@@ -15,6 +18,8 @@ function ArtistDetails() {
   const fetchedArtistData = useFetchArtist();
   const API_KEY = process.env.REACT_APP_API_KEY;
   const { isUserLoggedIn, setIsUserLoggedIn } = useContext(LoginStoreContext);
+  const { getFavorites, buttonInput, setButtonInput, setFavorites } =
+    useContext(LikeContext);
 
   /* the ID being sent from GetData in URL. It is defined in the route in app.js (Have a look you crook) */
   let artistId = useParams();
@@ -34,6 +39,10 @@ function ArtistDetails() {
     }
   };
 
+  const handleButtonChange = () => {
+    setFavorites(artistId);
+  };
+
   // So that fetchReleases only runs one time
   useEffect(() => {
     fetchReleases();
@@ -43,6 +52,10 @@ function ArtistDetails() {
   useEffect(() => {
     setArtistDetailData(fetchedArtistData);
   }, [fetchedArtistData]);
+
+  useEffect(() => {
+    getFavorites(artistId);
+  }, []);
 
   return (
     <Container>
@@ -76,6 +89,20 @@ function ArtistDetails() {
           ) : (
             fetchArtistResource.profile
           )}
+        </Col>
+      </Row>
+      <Row>
+        <Col></Col>
+        <Col>
+          <ToggleButtonGroup
+            type="checkbox"
+            value={buttonInput}
+            onChange={handleButtonChange}
+          >
+            <ToggleButton id="tbg-btn-1" value={1}>
+              Like
+            </ToggleButton>
+          </ToggleButtonGroup>
         </Col>
       </Row>
       <br></br>
