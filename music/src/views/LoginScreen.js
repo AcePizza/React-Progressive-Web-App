@@ -1,20 +1,20 @@
 import { async } from "@firebase/util";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/esm/Container";
 import Form from "react-bootstrap/Form";
+import { render } from "react-dom";
 import { useNavigate } from "react-router-dom";
 import { LoginStoreContext } from "../components/context/loginContext";
 import LoadingPleaseWait from "../components/LoadingPleaseWait";
 
 function LoginScreen() {
   // the context data (Test). The Value from this is not set globally
-  const { isUserLoggedIn, setIsUserLoggedIn, logout } =
+  const { isUserLoggedIn, setIsUserLoggedIn, logout, login } =
     useContext(LoginStoreContext);
   const redirectTo = useNavigate();
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState();
   const [password, setPassword] = useState("");
-  const { login } = useContext(LoginStoreContext);
 
   const loginEmailInputHandeler = (evt) => {
     setEmail(evt.target.value);
@@ -34,8 +34,6 @@ function LoginScreen() {
 
   const isSomeoneLoggedIn = () => {
     switch (isUserLoggedIn) {
-      case undefined:
-        return <LoadingPleaseWait />;
       case false:
         return (
           <Form>
@@ -77,10 +75,12 @@ function LoginScreen() {
             Log out
           </Button>
         );
+      case undefined:
+        return <LoadingPleaseWait />;
     }
   };
 
-  console.log("is the user logged in", isUserLoggedIn);
+  console.log(isUserLoggedIn);
 
   return <Container>{isSomeoneLoggedIn()}</Container>;
 }
