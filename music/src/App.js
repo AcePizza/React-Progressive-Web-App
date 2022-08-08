@@ -5,6 +5,10 @@ import {
   LoginStoreContext,
   LoginStoreContextProvider,
 } from "./components/context/loginContext";
+import {
+  LikeContext,
+  LikeContextProvider,
+} from "./components/context/likeContext";
 import MainNavbar from "./components/MainNavbar";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { app } from "./config/config";
@@ -27,23 +31,28 @@ function App() {
   return (
     <div className="App">
       <LoginStoreContextProvider>
-        <MainNavbar getSearchInput={getSearchInput} />
-        <Routes>
-          <Route path="/" element={<LandingPage />} />
-          <Route path="home" element={<GetData searchInput={searchInput} />} />
-          <Route
-            path="home/details/:artist"
-            element={
-              <ProtectedRoute>
-                <ArtistDetails />
-              </ProtectedRoute>
-            }
-          />
-          <Route path="*" element={<NothingMuch />} />
-          <Route path="registeruser" element={<RegisterUser />} />
-          <Route path="LoginScreen" element={<LoginScreen />} />
-          <Route path="chatpage" element={<ChatPage />} />
-        </Routes>
+        <LikeContextProvider>
+          <MainNavbar getSearchInput={getSearchInput} />
+          <Routes>
+            <Route path="/" element={<LandingPage />} />
+            <Route
+              path="home"
+              element={<GetData searchInput={searchInput} />}
+            />
+            <Route
+              path="home/details/:artist"
+              element={
+                <ProtectedRoute>
+                  <ArtistDetails />
+                </ProtectedRoute>
+              }
+            />
+            <Route path="*" element={<NothingMuch />} />
+            <Route path="registeruser" element={<RegisterUser />} />
+            <Route path="LoginScreen" element={<LoginScreen />} />
+            <Route path="chatpage" element={<ChatPage />} />
+          </Routes>
+        </LikeContextProvider>
       </LoginStoreContextProvider>
     </div>
   );
